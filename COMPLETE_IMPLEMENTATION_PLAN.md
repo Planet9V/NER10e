@@ -2764,3 +2764,65 @@ python scripts/send_alert.py "Rollback executed: [reason]"
 
 Copy the exact prompt from **Appendix A, CORE-02** and execute it to begin Week 1, Day 3.
 
+
+---
+
+## 🎯 SESSION TRACKING FILES
+
+**IMPORTANT**: For easy session resumption and progress tracking, use these dedicated files:
+
+### Primary Tracking Files:
+
+1. **IMPLEMENTATION_TASKMASTER.md** - Session Control Center
+   - **Location**: `/home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/IMPLEMENTATION_TASKMASTER.md`
+   - **Purpose**: Current status, next actions, task checklist
+   - **Read First**: Always check this file when resuming work
+   - **Updated**: After each task completion
+
+2. **IMPLEMENTATION_LOG.md** - Detailed Activity Log
+   - **Location**: `/home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/IMPLEMENTATION_LOG.md`
+   - **Purpose**: Timestamped log of all activities
+   - **Entry Format**: Task, Agent, Action, Status, Deliverables, Metrics, Git Commit
+   - **Updated**: After each task completion
+
+### Quick Start for New Session:
+
+```bash
+# 1. Read the TASKMASTER first
+cat /home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/IMPLEMENTATION_TASKMASTER.md
+
+# 2. Check current task and next action
+# 3. Get exact prompt from Appendix A of this file
+# 4. Execute the prompt
+# 5. Update both tracking files after completion
+```
+
+### Update Protocol:
+
+After completing any task:
+
+1. Update `IMPLEMENTATION_TASKMASTER.md`:
+   - Mark task as ✅ COMPLETE
+   - Update timestamp
+   - Update NEXT_TASK
+   - Update metrics
+
+2. Add entry to `IMPLEMENTATION_LOG.md`:
+   - Use next entry number
+   - Include timestamp (CST)
+   - Fill all fields
+   - Update summary statistics
+
+3. Commit to git:
+   ```bash
+   git add IMPLEMENTATION_TASKMASTER.md IMPLEMENTATION_LOG.md
+   git commit -m "docs: Log completion of [TASK_ID]"
+   git push origin main
+   ```
+
+---
+
+**Session Tracking Created**: 2025-11-24 14:53:17 CST  
+**Current Status**: CORE-02 ready to start  
+**Next Action**: Execute CORE-02 prompt from Appendix A
+
