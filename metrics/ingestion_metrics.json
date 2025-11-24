@@ -1,0 +1,25 @@
+{
+  "start_time": "2025-11-24T13:49:34.156575",
+  "files_scanned": 1586,
+  "files_processed": 91,
+  "entities_extracted": 4729,
+  "errors_encountered": 0,
+  "train_docs": 72,
+  "dev_docs": 19,
+  "entity_types": {
+    "EQUIPMENT": 1717,
+    "ATTACK_PATTERN": 641,
+    "VULNERABILITY": 820,
+    "COGNITIVE_BIAS": 660,
+    "PERSONALITY_TRAIT": 255,
+    "THREAT_ACTOR": 397,
+    "MALWARE": 171,
+    "ORGANIZATION": 25,
+    "LOCATION": 16,
+    "SECTOR": 19,
+    "SOFTWARE": 8
+  },
+  "end_time": "2025-11-24T13:49:42.163053",
+  "processing_time_seconds": 8.01,
+  "files_per_second": 198.09
+}

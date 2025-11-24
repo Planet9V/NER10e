@@ -6,6 +6,20 @@ from spacy.tokens import DocBin
 from pathlib import Path
 from neo4j import GraphDatabase
 from tqdm import tqdm
+import logging
+from datetime import datetime
+import time
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('/home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/logs/ingestion.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Configuration
 DATA_ROOT = "/home/jim/5_NER10_Training_2025-11-24/Training_Data_Check_to_see"
@@ -142,14 +156,30 @@ def parse_file(file_path, nlp, mapping):
     return doc
 
 def main():
+    start_time = time.time()
+    logger.info("Starting tag ingestion process")
+    
+    metrics = {
+        "start_time": datetime.now().isoformat(),
+        "files_scanned": 0,
+        "files_processed": 0,
+        "entities_extracted": 0,
+        "errors_encountered": 0,
+        "train_docs": 0,
+        "dev_docs": 0,
+        "entity_types": {}
+    }
+    
     nlp = spacy.blank("en")
     mapping = load_mapping()
+    logger.info(f"Loaded schema mapping with {len(mapping['entities'])} entity types")
     
     train_db = DocBin()
     dev_db = DocBin()
     
     files = list(Path(DATA_ROOT).rglob("*.md"))
-    print(f"Scanning {len(files)} files...")
+    metrics["files_scanned"] = len(files)
+    logger.info(f"Scanning {len(files)} files...")
     
     count = 0
     for i, file_path in enumerate(tqdm(files)):
@@ -162,21 +192,53 @@ def main():
             doc = parse_file(file_path, nlp, mapping)
             
             if len(doc.ents) > 0:
+                # Track entity types
+                for ent in doc.ents:
+                    metrics["entity_types"][ent.label_] = metrics["entity_types"].get(ent.label_, 0) + 1
+                    metrics["entities_extracted"] += 1
+                
                 # 80/20 Split
                 if i % 5 == 0:
                     dev_db.add(doc)
+                    metrics["dev_docs"] += 1
                 else:
                     train_db.add(doc)
+                    metrics["train_docs"] += 1
                 count += 1
+                metrics["files_processed"] += 1
+                
+                logger.debug(f"Processed {file_path.name}: {len(doc.ents)} entities")
         except Exception as e:
-            print(f"Error processing {file_path}: {e}")
+            logger.error(f"Error processing {file_path}: {e}")
+            metrics["errors_encountered"] += 1
             
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     train_db.to_disk(f"{OUTPUT_DIR}/train.spacy")
     dev_db.to_disk(f"{OUTPUT_DIR}/dev.spacy")
     
-    print(f"Processed {count} files with annotations.")
-    print(f"Saved to {OUTPUT_DIR}")
+    # Calculate final metrics
+    processing_time = time.time() - start_time
+    metrics["end_time"] = datetime.now().isoformat()
+    metrics["processing_time_seconds"] = round(processing_time, 2)
+    metrics["files_per_second"] = round(metrics["files_scanned"] / processing_time, 2) if processing_time > 0 else 0
+    
+    # Save metrics
+    metrics_file = "/home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/metrics/ingestion_metrics.json"
+    with open(metrics_file, 'w') as f:
+        json.dump(metrics, f, indent=2)
+    
+    logger.info(f"Processed {count} files with annotations.")
+    logger.info(f"Train docs: {metrics['train_docs']}, Dev docs: {metrics['dev_docs']}")
+    logger.info(f"Total entities extracted: {metrics['entities_extracted']}")
+    logger.info(f"Processing time: {processing_time:.2f}s")
+    logger.info(f"Saved to {OUTPUT_DIR}")
+    logger.info(f"Metrics saved to {metrics_file}")
+    
+    print(f"\n✅ Ingestion complete!")
+    print(f"📊 Metrics: {metrics['files_processed']} files, {metrics['entities_extracted']} entities")
+    print(f"⏱️  Time: {processing_time:.2f}s ({metrics['files_per_second']:.2f} files/sec)")
+    print(f"📁 Logs: logs/ingestion.log")
+    print(f"📈 Metrics: metrics/ingestion_metrics.json")
 
 if __name__ == "__main__":
     main()

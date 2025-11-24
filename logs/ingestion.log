@@ -1,0 +1,9 @@
+2025-11-24 13:49:34,156 - __main__ - INFO - Starting tag ingestion process
+2025-11-24 13:49:34,226 - __main__ - INFO - Loaded schema mapping with 12 entity types
+2025-11-24 13:49:34,232 - __main__ - INFO - Scanning 1586 files...
+2025-11-24 13:49:42,163 - __main__ - INFO - Processed 91 files with annotations.
+2025-11-24 13:49:42,163 - __main__ - INFO - Train docs: 72, Dev docs: 19
+2025-11-24 13:49:42,163 - __main__ - INFO - Total entities extracted: 4729
+2025-11-24 13:49:42,163 - __main__ - INFO - Processing time: 8.01s
+2025-11-24 13:49:42,163 - __main__ - INFO - Saved to /home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/corpus
+2025-11-24 13:49:42,163 - __main__ - INFO - Metrics saved to /home/jim/5_NER10_Training_2025-11-24/ner10_pipeline/metrics/ingestion_metrics.json
