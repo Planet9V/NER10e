@@ -1,0 +1,45 @@
+title: "NER10 Fine-Tuning Pipeline"
+description: "Iterative fine-tuning for AEON Cyber Digital Twin using Prodigy and spaCy."
+
+# Variables can be referenced across the project.yml using ${vars.var_name}
+vars:
+  config: "configs/train_config.cfg"
+  name: "ner10"
+  version: "v1"
+  lang: "en"
+  gpu_id: -1  # Set to 0 for GPU
+
+# These are the directories that the project needs. The project CLI will make
+# sure that they always exist.
+directories: ["assets", "training", "configs", "metrics", "corpus"]
+
+# Assets that should be downloaded or available in the directory.
+assets: []
+
+# Workflows are sequences of commands (see below) to execute.
+workflows:
+  all:
+    - train
+    - evaluate
+
+# Project commands
+commands:
+  - name: "train"
+    help: "Train the NER model on the ingested corpus."
+    script:
+      - "python -m spacy train ${vars.config} --output training/ --paths.train corpus/train.spacy --paths.dev corpus/dev.spacy --gpu-id ${vars.gpu_id}"
+
+  - name: "evaluate"
+    help: "Evaluate the model and save metrics."
+    script:
+      - "python -m spacy evaluate training/model-best corpus/dev.spacy --output metrics/${vars.name}_${vars.version}.json --gpu-id ${vars.gpu_id}"
+
+  - name: "correct"
+    help: "Start Prodigy server to correct predictions on raw data."
+    script:
+      - "prodigy ner10.enrich ${vars.name}_${vars.version} corpus/raw_data.jsonl -F scripts/ner10_recipes.py"
+
+  - name: "export"
+    help: "Export annotations from Prodigy to spaCy format."
+    script:
+      - "prodigy data-to-spacy corpus/ --ner ${vars.name}_${vars.version} --lang ${vars.lang}"

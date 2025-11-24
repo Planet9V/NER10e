@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "EQUIPMENT": [
+      "Equipment", "Device", "WaterDevice", "EnergyDevice", "TrafficSensor", 
+      "Sensor", "TrafficLight", "StreetLight", "Pump", "Valve", "PLC", "RTU", "SCADA"
+    ],
+    "SECTOR": [
+      "Sector", "Critical_Infrastructure_Sector", "Water_Sector", "Energy_Sector", 
+      "Transportation_Sector", "Healthcare_Sector", "Financial_Sector"
+    ],
+    "THREAT_ACTOR": [
+      "ThreatActor", "Adversary", "APT_GROUP", "NATION_STATE", "HackerGroup"
+    ],
+    "VULNERABILITY": [
+      "Vulnerability", "CVE", "Weakness", "CWE", "ZeroDay"
+    ],
+    "MALWARE": [
+      "Malware", "Ransomware", "Virus", "Trojan", "Worm", "Rootkit"
+    ],
+    "ATTACK_PATTERN": [
+      "AttackPattern", "AttackTechnique", "TTP", "CAPEC", "Exploit"
+    ],
+    "COGNITIVE_BIAS": [
+      "CognitiveBias", "Cognitive_Bias", "Bias"
+    ],
+    "PERSONALITY_TRAIT": [
+      "Personality_Trait", "PersonalityTrait"
+    ],
+    "EMOTION": [
+      "Emotion", "Affect"
+    ],
+    "LOCATION": [
+      "Location", "Region", "Country", "City", "Facility", "Zone"
+    ],
+    "ORGANIZATION": [
+      "Organization", "Company", "Agency", "Vendor"
+    ],
+    "SOFTWARE": [
+      "Software", "Application", "OperatingSystem", "Firmware", "Component"
+    ]
+  },
+  "relationships": [
+    "TARGETS",
+    "EXPLOITS",
+    "USES_TTP",
+    "LOCATED_IN",
+    "ATTRIBUTED_TO",
+    "HAS_VULNERABILITY",
+    "AFFECTS_SECTOR",
+    "EXHIBITS_PERSONALITY_TRAIT",
+    "ACTIVATES_BIAS",
+    "MOTIVATED_BY",
+    "MITIGATED_BY",
+    "CONNECTED_TO",
+    "CONTROLS",
+    "OWNS_EQUIPMENT",
+    "DEPLOYED_IN",
+    "HAS_COMPONENT",
+    "INDICATES",
+    "PREDICTS",
+    "CAUSED_BY",
+    "INFLUENCED_BY"
+  ]
+}

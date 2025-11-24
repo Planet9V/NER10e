@@ -1,0 +1,40 @@
+{
+    "theme": "basic",
+    "custom_theme": {
+        "card_background_color": "#ffffff",
+        "label_background_color": "#e0e0e0"
+    },
+    "buttons": [
+        "accept",
+        "reject",
+        "ignore",
+        "undo"
+    ],
+    "batch_size": 10,
+    "history_size": 10,
+    "port": 8080,
+    "host": "localhost",
+    "cors": true,
+    "db": "sqlite",
+    "db_settings": {
+        "sqlite": {
+            "name": "prodigy.db",
+            "path": "."
+        }
+    },
+    "validate": true,
+    "auto_exclude_current": true,
+    "instant_submit": false,
+    "feed_overlap": true,
+    "ui_lang": "en",
+    "project_info": [
+        "dataset",
+        "session",
+        "lang",
+        "view_id",
+        "spans_count"
+    ],
+    "show_stats": true,
+    "ner_manual_label_style": "dropdown",
+    "global_css": ".prodigy-content { font-family: 'Inter', sans-serif; }"
+}

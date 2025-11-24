@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Prodigy
+*.db
+*.sqlite
+
+# Neo4j
+neo4j_schema_dump.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Large Data (Optional - keep corpus if small enough, otherwise use DVC)
+corpus/
+training/
+
