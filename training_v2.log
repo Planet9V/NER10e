@@ -1,0 +1,70 @@
+Starting fresh training run (v2)...
+Executing training command...
+[38;5;2m✔ Created output directory:
+/app/NER11_Gold_Standard/models/ner11_v2[0m
+[38;5;4mℹ Saving to output directory:
+/app/NER11_Gold_Standard/models/ner11_v2[0m
+[38;5;4mℹ Using GPU: 0[0m
+[1m
+=========================== Initializing pipeline ===========================[0m
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[38;5;2m✔ Initialized pipeline[0m
+[1m
+============================= Training pipeline =============================[0m
+[38;5;4mℹ Pipeline: ['transformer', 'ner'][0m
+[38;5;4mℹ Initial learn rate: 0.0[0m
+E    #       LOSS TRANS...  LOSS NER  ENTS_F  ENTS_P  ENTS_R  SCORE 
+---  ------  -------------  --------  ------  ------  ------  ------
+Starting fresh training run (v2)...
+Executing training command...
+[38;5;4mℹ Saving to output directory:
+/app/NER11_Gold_Standard/models/ner11_v2[0m
+[38;5;4mℹ Using GPU: 0[0m
+[1m
+=========================== Initializing pipeline ===========================[0m
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[38;5;2m✔ Initialized pipeline[0m
+[1m
+============================= Training pipeline =============================[0m
+[38;5;4mℹ Pipeline: ['transformer', 'ner'][0m
+[38;5;4mℹ Initial learn rate: 0.0[0m
+E    #       LOSS TRANS...  LOSS NER  ENTS_F  ENTS_P  ENTS_R  SCORE 
+---  ------  -------------  --------  ------  ------  ------  ------
+Training command finished. Check /home/jim/5_NER10_Training_2025-11-24/NER11_Gold_Standard/training_v2.log for details.
+Starting fresh training run (v2)...
+Executing training command...
+[38;5;4mℹ Saving to output directory:
+/app/NER11_Gold_Standard/models/ner11_v2[0m
+[38;5;4mℹ Using GPU: 0[0m
+[1m
+=========================== Initializing pipeline ===========================[0m
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[38;5;2m✔ Initialized pipeline[0m
+[1m
+============================= Training pipeline =============================[0m
+[38;5;4mℹ Pipeline: ['transformer', 'ner'][0m
+[38;5;4mℹ Initial learn rate: 0.0[0m
+E    #       LOSS TRANS...  LOSS NER  ENTS_F  ENTS_P  ENTS_R  SCORE 
+---  ------  -------------  --------  ------  ------  ------  ------
+Training command finished. Check /home/jim/5_NER10_Training_2025-11-24/NER11_Gold_Standard/training_v2.log for details.
+Starting fresh training run (v2)...
+Executing training command...
+[38;5;4mℹ Saving to output directory:
+/app/NER11_Gold_Standard/models/ner11_v2[0m
+[38;5;4mℹ Using GPU: 0[0m
+[1m
+=========================== Initializing pipeline ===========================[0m
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[38;5;2m✔ Initialized pipeline[0m
+[1m
+============================= Training pipeline =============================[0m
+[38;5;4mℹ Pipeline: ['transformer', 'ner'][0m
+[38;5;4mℹ Initial learn rate: 0.0[0m
+E    #       LOSS TRANS...  LOSS NER  ENTS_F  ENTS_P  ENTS_R  SCORE 
+---  ------  -------------  --------  ------  ------  ------  ------
+Token indices sequence length is longer than the specified maximum sequence length for this model (617 > 512). Running this sequence through the model will result in indexing errors
+  0       0        7112.03   3186.96    0.00    0.00    0.01    0.00

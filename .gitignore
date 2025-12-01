@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .DS_Store
 .ipynb_checkpoints/
+NER11_AWS_Package/
+ner11_aws_package.tar.gz

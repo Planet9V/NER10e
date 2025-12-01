@@ -1,0 +1,176 @@
+[0;32mStarting NER11 Training Setup (Local Gold Standard)...[0m
+[0;32mBuilding and Starting Docker Container...[0m
+time="2025-11-28T10:56:27-06:00" level=warning msg="/home/jim/5_NER10_Training_2025-11-24/NER11_Gold_Standard/docker/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#1 [internal] load local bake definitions
+#1 reading from stdin 616B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 889B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04@sha256:8f9dd0d09d3ad3900357a1cf7f887888b5b74056636cd6ef03c160c3cd4b1d95
+#5 resolve docker.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04@sha256:8f9dd0d09d3ad3900357a1cf7f887888b5b74056636cd6ef03c160c3cd4b1d95 0.0s done
+#5 DONE 0.0s
+
+#6 [4/6] RUN pip3 install --no-cache-dir --upgrade pip &&     pip3 install --no-cache-dir     "spacy[cuda11x]"     spacy-transformers     torch     pandas     numpy     tqdm     cupy-cuda11x
+#6 CACHED
+
+#7 [2/6] RUN apt-get update && apt-get install -y     python3.10     python3-pip     python3-venv     git     build-essential     curl     && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [5/6] RUN python3 -m spacy download en_core_web_sm
+#8 CACHED
+
+#9 [3/6] WORKDIR /app
+#9 CACHED
+
+#10 [6/6] RUN python3 -m spacy download en_core_web_trf
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:289aaab005b7bd2eefb32d9e2e6505404460e3ccc83c3faf2513db074186c494 done
+#11 exporting config sha256:00a3bc811080b179cc172f0526c67414b13fa618513aab25f747f8270b66f4a7 done
+#11 exporting attestation manifest sha256:7b519dea255b56370bc9f77a3898b6a19cb0df77c1a113aa2b79d9c7d0b82ff8 0.1s done
+#11 exporting manifest list sha256:3d4191cfd038303462f70c57e22820b578f3e0545de1adb20fa1d02671942090 0.0s done
+#11 naming to docker.io/library/ner11-gold-standard:latest
+#11 naming to docker.io/library/ner11-gold-standard:latest done
+#11 unpacking to docker.io/library/ner11-gold-standard:latest 0.0s done
+#11 DONE 0.2s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ ner11-gold-standard:latest  Built
+ Container ner11_training_env  Recreate
+ Container ner11_training_env  Recreated
+ Container ner11_training_env  Starting
+ Container ner11_training_env  Started
+[0;32mWaiting for container to initialize...[0m
+[0;32mStarting Training...[0m
+[38;5;4mℹ Saving to output directory:
+/app/NER11_Gold_Standard/models/ner11_v3[0m
+[38;5;4mℹ Using GPU: 0[0m
+[1m
+=========================== Initializing pipeline ===========================[0m
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[38;5;2m✔ Initialized pipeline[0m
+[1m
+============================= Training pipeline =============================[0m
+[38;5;4mℹ Pipeline: ['transformer', 'ner'][0m
+[38;5;4mℹ Initial learn rate: 0.0[0m
+E    #       LOSS TRANS...  LOSS NER  ENTS_F  ENTS_P  ENTS_R  SCORE 
+---  ------  -------------  --------  ------  ------  ------  ------
+Token indices sequence length is longer than the specified maximum sequence length for this model (1141 > 512). Running this sequence through the model will result in indexing errors
+  0       0        7474.23    567.35    0.01    0.00    0.01    0.00
+  0     200     1204116.11  95915.12    2.71   27.71    1.43    0.03
+  0     400       18533.93  22007.25   60.28   80.32   48.25    0.60
+  0     600       14175.06  13157.87   72.90   74.54   71.32    0.73
+  0     800       29932.38  10162.14   79.37   83.16   75.90    0.79
+  0    1000       16271.09   8223.09   81.15   84.18   78.32    0.81
+  0    1200       16982.72   7309.10   82.20   86.06   78.68    0.82
+  0    1400       11911.82   6653.89   82.79   83.82   81.78    0.83
+  0    1600        4637.07   6127.84   84.25   87.99   80.83    0.84
+  0    1800        5361.78   5698.61   85.14   88.44   82.07    0.85
+  0    2000        7940.11   5335.26   85.16   89.39   81.32    0.85
+  0    2200       15856.46   6064.96   86.42   89.93   83.18    0.86
+  0    2400       11560.20   5145.14   86.52   88.18   84.92    0.87
+  0    2600        5767.32   4817.98   86.77   91.30   82.67    0.87
+  0    2800        5915.42   4847.31   87.18   89.36   85.11    0.87
+  0    3000        4153.52   4479.76   90.73   91.01   90.45    0.91
+  0    3200        2382.03   4272.80   88.28   91.21   85.54    0.88
+  0    3400        3109.59   4390.84   90.74   91.23   90.26    0.91
+  0    3600        2005.08   4351.84   89.99   88.72   91.30    0.90
+  0    3800        3583.28   4250.55   87.99   91.27   84.93    0.88
+  0    4000        1949.39   3778.30   88.73   89.84   87.66    0.89
+  0    4200        3064.99   3895.95   88.36   92.76   84.35    0.88
+  0    4400        2237.01   3879.20   89.66   92.38   87.10    0.90
+  0    4600        7137.26   3933.81   91.64   91.91   91.37    0.92
+  0    4800       13103.04   4106.66   90.37   91.23   89.53    0.90
+  0    5000       11775.83   3840.71   91.13   90.96   91.30    0.91
+  0    5200       21693.33   4073.16   87.30   89.58   85.14    0.87
+  0    5400       12360.77   3967.41   90.99   92.07   89.94    0.91
+  0    5600        9136.53   3952.14   90.58   90.02   91.15    0.91
+  0    5800       13272.72   4010.11   91.08   91.02   91.15    0.91
+  0    6000       17759.02   3765.83   91.37   91.04   91.70    0.91
+  1    6200        3497.11   3429.28   92.02   92.04   91.99    0.92
+  1    6400       18181.35   4045.75   91.42   90.51   92.35    0.91
+  1    6600       16153.59   3629.57   91.15   91.38   90.93    0.91
+  1    6800        3905.16   3156.74   90.36   91.47   89.28    0.90
+  1    7000       25118.66   3612.05   89.37   94.35   84.90    0.89
+  1    7200        3347.36   3202.95   92.37   91.87   92.87    0.92
+  1    7400        4039.55   3261.87   90.44   90.36   90.51    0.90
+  1    7600       17018.20   3560.43   90.22   93.00   87.59    0.90
+  1    7800        6002.09   3011.70   90.96   92.72   89.27    0.91
+  1    8000       11024.84   3335.08   88.65   91.77   85.73    0.89
+  1    8200        1474.02   3025.34   92.57   92.35   92.79    0.93
+  1    8400        7313.47   2984.15   91.99   93.66   90.39    0.92
+  1    8600        6485.52   2994.93   89.82   92.41   87.37    0.90
+  1    8800       10409.01   3095.12   89.95   94.86   85.52    0.90
+  1    9000        3312.13   2874.85   92.68   92.68   92.67    0.93
+  1    9200        8708.86   2913.17   92.51   92.06   92.97    0.93
+  1    9400        1141.55   2666.43   92.71   93.23   92.19    0.93
+  1    9600       19279.80   3166.73   93.25   93.02   93.49    0.93
+  1    9800        1165.24   2687.11   91.30   93.12   89.54    0.91
+  1   10000        4780.38   2948.72   92.51   93.11   91.92    0.93
+  1   10200        7513.92   2969.63   91.24   93.03   89.52    0.91
+  1   10400       10364.37   2747.37   93.26   93.53   92.99    0.93
+  1   10600        7085.80   2897.37   92.28   94.09   90.54    0.92
+  1   10800        2854.36   2639.72   92.42   92.59   92.25    0.92
+  1   11000        1206.35   2436.93   92.97   94.37   91.62    0.93
+  1   11200        4631.04   2594.82   92.53   93.74   91.35    0.93
+  1   11400        9829.76   2896.41   91.25   93.98   88.67    0.91
+  1   11600        1575.29   2738.50   92.55   92.99   92.11    0.93
+  1   11800        8613.13   2414.65   91.39   93.29   89.57    0.91
+  1   12000        1176.50   2624.36   93.07   92.49   93.66    0.93
+  2   12200       18540.49   2574.52   93.39   93.28   93.50    0.93
+  2   12400        1206.76   2479.80   92.82   93.71   91.95    0.93
+  2   12600        1440.99   2433.49   93.47   94.77   92.21    0.93
+  2   12800       20910.93   2580.06   93.28   93.76   92.80    0.93
+  2   13000        4146.26   2468.18   93.14   92.32   93.97    0.93
+  2   13200        3587.35   2427.74   92.02   92.54   91.51    0.92
+  2   13400       16988.89   2768.09   91.66   93.15   90.20    0.92
+  2   13600        7115.47   2562.85   93.17   93.33   93.01    0.93
+  2   13800        2195.19   2367.18   92.15   92.93   91.39    0.92
+  2   14000        5625.39   2600.83   91.31   93.17   89.53    0.91
+  2   14200       11476.95   2275.70   93.08   93.95   92.22    0.93
+  2   14400        3551.57   2534.45   92.01   94.06   90.04    0.92
+  2   14600        5997.88   2469.08   93.02   93.67   92.38    0.93
+  2   14800       11251.53   2506.61   93.13   93.67   92.59    0.93
+  2   15000       16794.61   2434.61   93.36   94.45   92.29    0.93
+  2   15200        5499.60   2360.46   93.73   93.58   93.88    0.94
+  2   15400        3809.05   2263.87   92.03   94.29   89.88    0.92
+  2   15600        5495.70   2288.48   93.00   93.28   92.72    0.93
+  2   15800        1813.93   2082.81   93.70   93.91   93.49    0.94
+  2   16000       19258.29   2313.28   93.91   93.82   94.00    0.94
+  2   16200        7577.17   2233.05   93.87   94.35   93.39    0.94
+  2   16400        3163.97   2084.30   94.13   94.30   93.95    0.94
+  2   16600        1549.66   2411.31   94.13   94.39   93.86    0.94
+  2   16800        3236.88   2219.92   93.87   93.92   93.81    0.94
+  2   17000       32571.21   2226.88   93.62   94.66   92.60    0.94
+  2   17200         842.32   2033.62   93.15   94.52   91.82    0.93
+  2   17400        5503.96   2361.18   92.90   94.64   91.23    0.93
+  2   17600       21523.16   2105.48   93.10   93.79   92.42    0.93
+  2   17800       12757.86   2256.96   93.03   93.09   92.96    0.93
+  2   18000         897.38   2044.68   92.96   93.64   92.29    0.93
+  3   18200         871.34   1945.08   92.69   93.87   91.55    0.93
+  3   18400         980.73   2065.80   92.75   93.89   91.65    0.93
+  3   18600        1528.80   1934.69   92.42   93.29   91.58    0.92
+  3   18800        1342.99   1988.35   91.90   93.68   90.18    0.92
+  3   19000         916.57   2014.45   92.16   93.80   90.59    0.92
+  3   19200        2105.36   2002.32   92.41   93.78   91.09    0.92
+  3   19400        5684.90   1846.53   92.88   93.95   91.84    0.93
+  3   19600        1363.84   1957.24   92.65   93.91   91.44    0.93
+  3   19800        3532.15   1955.44   93.01   93.87   92.15    0.93
+  3   20000        1407.81   2096.10   93.04   93.92   92.18    0.93
+[38;5;2m✔ Saved pipeline to output directory[0m
+/app/NER11_Gold_Standard/models/ner11_v3/model-last
+[0;32mTraining Complete![0m

@@ -1,0 +1,76 @@
+[0;32mStarting NER11 Training Setup (Local Gold Standard)...[0m
+[0;32mBuilding and Starting Docker Container...[0m
+time="2025-11-28T09:26:52-06:00" level=warning msg="/home/jim/5_NER10_Training_2025-11-24/NER11_Gold_Standard/docker/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+#1 [internal] load local bake definitions
+#1 reading from stdin 616B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 889B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+#3 DONE 0.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04@sha256:8f9dd0d09d3ad3900357a1cf7f887888b5b74056636cd6ef03c160c3cd4b1d95
+#5 resolve docker.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04@sha256:8f9dd0d09d3ad3900357a1cf7f887888b5b74056636cd6ef03c160c3cd4b1d95 0.0s done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apt-get update && apt-get install -y     python3.10     python3-pip     python3-venv     git     build-essential     curl     && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [3/6] WORKDIR /app
+#7 CACHED
+
+#8 [5/6] RUN python3 -m spacy download en_core_web_sm
+#8 CACHED
+
+#9 [4/6] RUN pip3 install --no-cache-dir --upgrade pip &&     pip3 install --no-cache-dir     "spacy[cuda11x]"     spacy-transformers     torch     pandas     numpy     tqdm     cupy-cuda11x
+#9 CACHED
+
+#10 [6/6] RUN python3 -m spacy download en_core_web_trf
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 exporting manifest sha256:289aaab005b7bd2eefb32d9e2e6505404460e3ccc83c3faf2513db074186c494 done
+#11 exporting config sha256:00a3bc811080b179cc172f0526c67414b13fa618513aab25f747f8270b66f4a7 done
+#11 exporting attestation manifest sha256:180d6b92d5fecd154274ade3facfdafe483201ee0febbbcb15f8303f649155a1
+#11 exporting attestation manifest sha256:180d6b92d5fecd154274ade3facfdafe483201ee0febbbcb15f8303f649155a1 0.1s done
+#11 exporting manifest list sha256:34269480d30bf64b07b13ff1504c968bd92a28d43a0a4e5ae03a6c714582af88 0.0s done
+#11 naming to docker.io/library/ner11-gold-standard:latest done
+#11 unpacking to docker.io/library/ner11-gold-standard:latest 0.0s done
+#11 DONE 0.2s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ ner11-gold-standard:latest  Built
+ Container ner11_training_env  Recreate
+ Container ner11_training_env  Recreated
+ Container ner11_training_env  Starting
+ Container ner11_training_env  Started
+[0;32mWaiting for container to initialize...[0m
+[0;32mStarting Training...[0m
+[38;5;4mℹ Saving to output directory:
+/app/NER11_Gold_Standard/models/ner11_v3[0m
+[38;5;4mℹ Using GPU: 0[0m
+[1m
+=========================== Initializing pipeline ===========================[0m
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[38;5;2m✔ Initialized pipeline[0m
+[1m
+============================= Training pipeline =============================[0m
+[38;5;4mℹ Pipeline: ['transformer', 'ner'][0m
+[38;5;4mℹ Initial learn rate: 0.0[0m
+E    #       LOSS TRANS...  LOSS NER  ENTS_F  ENTS_P  ENTS_R  SCORE 
+---  ------  -------------  --------  ------  ------  ------  ------
+Token indices sequence length is longer than the specified maximum sequence length for this model (516 > 512). Running this sequence through the model will result in indexing errors
+[0;32mTraining Complete![0m
