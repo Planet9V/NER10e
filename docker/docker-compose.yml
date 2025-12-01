@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ner11-training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ner11-gold-standard:latest
+    container_name: ner11_training_env
+    volumes:
+      - ../:/app/NER11_Gold_Standard
+    working_dir: /app/NER11_Gold_Standard
+    # Enable GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    # Shared memory size is critical for PyTorch/DataLoader
+    shm_size: '16gb'
+    # Keep container running
+    command: tail -f /dev/null
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
